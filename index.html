@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sadman Rahman</title>
+<meta name="description" content="Sadman Rahman — signal processing and efficient deep learning for biomedical and wearable sensing. M.Sc. student, EEE, BUET.">
+<meta property="og:title" content="Sadman Rahman">
+<meta property="og:description" content="Signal processing and efficient deep learning for the body's signals.">
+<meta property="og:image" content="assets/portrait.jpg">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=7">
+<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="rv">
+      <span class="status mono"><span class="rec"></span>Signals × AI · Dhaka, BD · 23.8°N 90.4°E</span>
+      <h1>Sadman<br><em>Rahman</em><span class="dot">.</span></h1>
+      <p class="lead">I build <span class="mark">AI that understands signals</span>: deep learning and LLM systems on top of sharp signal processing, for EEG, ECG, motion and radar, small enough to run on the edge.</p>
+      <div class="cta">
+        <a class="btn solid" href="mailto:sdmrnwashere@gmail.com">Get in touch</a>
+        <a class="btn" href="assets/Sadman_Rahman_CV.pdf" target="_blank" rel="noopener">CV ↓</a>
+        <div class="icon-row" id="heroIcons"></div>
+      </div>
+    </div>
+    <figure class="fig rv">
+      <div class="fig-frame">
+        <span class="corner tl">Fig. 1</span><span class="corner br">ch-00 · rgb</span>
+        <img src="assets/portrait.jpg" alt="Portrait of Sadman Rahman" width="720" height="900">
+      </div>
+      <figcaption><b>Fig. 1.</b> Subject observed in natural habitat. Mild smile detected (<i>p</i> &lt; 0.05). Hover to restore colour.</figcaption>
+    </figure>
+  </header>
+
+  <!-- Live scope -->
+  <div class="scope rv">
+    <canvas id="scope" aria-label="Animated EEG, ECG, IMU and radar traces with a model attention strip"></canvas>
+    <div class="scope-bar"><span class="mono" id="scopeReadout">model ▸ listening…</span><span class="mono hide-sm">4 ch → model · live</span></div>
+  </div>
+
+  <!-- About -->
+  <section class="sec" id="about">
+    <div class="sec-head rv"><span class="num">§ 01</span><h2>Hello, <em>I’m Sadman</em></h2></div>
+    <div class="split rv">
+      <div class="prose" style="font-size:17px">
+        <p style="margin-top:0">I’m an M.Sc. student in Electrical and Electronic Engineering at <a href="https://www.buet.ac.bd/" target="_blank" rel="noopener">BUET</a>, working with Dr. Shaikh Anowarul Fattah on communication and signal processing. Before that I did my B.Sc. at <a href="https://mist.ac.bd/" target="_blank" rel="noopener">MIST</a>, finishing 2nd of 97 under Dr. Kazi Newaj Faisal.</p>
+        <p>I work where <strong>signal processing</strong> meets <strong>AI</strong>. A lot of it starts with a messy, non-stationary signal from a sensor on or near the body: I build sharper time–frequency representations of it, then design compact deep networks that learn from them. On the AI side I also build LLM systems, like a local RAG-based peer-review assistant, and I care about models that are accurate, explainable and small enough to live on a wearable.</p>
+        <p>I’m also a Research Assistant at MIST, building a privacy-preserving fingerprint attendance system for universities in Bangladesh.</p>
+        <p>Outside the lab I co-founded <a href="https://www.insia-lab.com/home" target="_blank" rel="noopener">INSIA Lab</a>, chaired the IEEE MIST Student Branch, and once wrote a peer-reviewed paper about screaming in heavy metal. I’m <span class="mark">open to Ph.D. positions</span>.</p>
+      </div>
+      <div class="panel dark">
+        <span class="mono">Now · Oct 2026</span>
+        <h3>On the bench</h3>
+        <ul>
+          <li>Starting my M.Sc. at BUET</li>
+          <li>Research Assistant at MIST: privacy-preserving handheld fingerprint attendance system</li>
+          <li>Building D²-Net for radar micro-Doppler activity localisation</li>
+          <li>Building JPR, a local Llama-3 RAG peer-review assistant</li>
+          <li>Five manuscripts under review</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="sec" id="news">
+    <div class="sec-head rv"><span class="num">§ 02</span><h2>Lab <em>log</em></h2><span class="aside mono">newest first</span></div>
+    <ul class="log rv">
+      <li><time>2026-10</time><span><span class="tag">new</span>Started my M.Sc. in EEE at BUET.</span></li>
+      <li><time>2026-09</time><span><span class="tag">new</span>Joined MIST as a Research Assistant, developing a privacy-preserving fingerprint-based attendance system.</span></li>
+      <li><time>2026-06</time><span><span class="tag">grad</span>Graduated from MIST, ranked 2nd of 97 with a 3.94 CGPA.</span></li>
+      <li><time>2026</time><span><span class="tag">paper</span>Wearable-EEG activity recognition in epileptic cohorts accepted in <i>Biomedical Signal Processing and Control</i> (Q1).</span></li>
+      <li><time>2026</time><span><span class="tag win">award</span>Best Presenter Award at IEEE QPAIN 2026.</span></li>
+      <li><time>2026</time><span><span class="tag">paper</span>Two first-author papers out in <i>IEEE Sensors Journal</i>: HatSeqNet and IMU–MMG gestures.</span></li>
+      <li><time>2026</time><span><span class="tag">paper</span>Three papers accepted at IEEE SPMB, ICACCESS and SPICSCON, including VoxScope.</span></li>
+      <li><time>2025</time><span><span class="tag win">award</span>Best Paper Award at IEEE SPICSCON 2025 for cough classification.</span></li>
+      <li><time>2025-06</time><span><span class="tag">lead</span>Became Chair of IEEE MIST SB and founded its Signal Processing Society chapter.</span></li>
+    </ul>
+  </section>
+
+  <!-- Research -->
+  <section class="sec" id="research">
+    <div class="sec-head rv"><span class="num">§ 03</span><h2>Where signals <em>meet AI</em></h2></div>
+    <div class="grid-4 rv">
+      <div class="rcard">
+        <svg class="glyph" viewBox="0 0 200 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M0 22 Q10 2 20 22 T40 22 Q46 8 52 22 T64 22 Q68 12 72 22 T80 22 Q83 16 86 22 T92 22 Q94 18 96 22 T100 22 Q103 16 106 22 T112 22 Q116 12 120 22 T128 22 Q134 8 140 22 T152 22 Q162 2 172 22 T200 22"/></svg>
+        <span class="mono">Signal</span>
+        <h3>Time–frequency <em>analysis</em></h3>
+        <p>Wavelets, synchroextracting transforms, Wigner–Ville and decomposition methods for non-stationary signals.</p>
+      </div>
+      <div class="rcard">
+        <svg class="glyph" viewBox="0 0 200 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8 L70 22 M20 22 L70 22 M20 36 L70 22 M20 8 L70 8 M20 36 L70 36 M70 8 L120 22 M70 22 L120 22 M70 36 L120 22 M120 22 H200"/><circle cx="20" cy="8" r="3"/><circle cx="20" cy="22" r="3"/><circle cx="20" cy="36" r="3"/><circle cx="70" cy="8" r="3"/><circle cx="70" cy="22" r="3"/><circle cx="70" cy="36" r="3"/><circle cx="120" cy="22" r="4"/></svg>
+        <span class="mono">AI</span>
+        <h3>Efficient <em>deep learning</em></h3>
+        <p>Lightweight and depthwise architectures, sequence models, representation learning and sensor fusion for edge devices.</p>
+      </div>
+      <div class="rcard">
+        <svg class="glyph" viewBox="0 0 200 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10 h60 a6 6 0 0 1 6 6 v10 a6 6 0 0 1 -6 6 h-44 l-10 8 v-8 h-6 a6 6 0 0 1 -6 -6 v-10 a6 6 0 0 1 6 -6z M20 21 h36 M100 22 H124 M132 22 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 M160 22 H200 M142 12 V4 M142 32 V40"/></svg>
+        <span class="mono">AI</span>
+        <h3>Applied AI &amp; <em>LLM systems</em></h3>
+        <p>RAG pipelines and agents (LangChain, LangGraph), explainable AI, and privacy-preserving biometric systems.</p>
+      </div>
+      <div class="rcard">
+        <svg class="glyph" viewBox="0 0 200 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0 26 H40 L46 22 L52 26 H62 L66 30 L72 4 L78 40 L84 26 H96 Q104 16 112 26 H140 L146 22 L152 26 H162 L166 30 L172 4 L178 40 L184 26 H200"/></svg>
+        <span class="mono">Signal × AI</span>
+        <h3>Biomedical &amp; <em>wearable sensing</em></h3>
+        <p>BCIs, activity and gesture recognition and neurological monitoring from EEG, ECG, sEMG, IMU, radar and bio-acoustics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected publications -->
+  <section class="sec" id="papers">
+    <div class="sec-head rv"><span class="num">§ 04</span><h2>Selected <em>papers</em></h2><a class="aside mono ul" href="publications/">All 14 →</a></div>
+    <ul class="pubs rv" id="selectedPubs"></ul>
+    <p class="note">* Equal contribution.</p>
+  </section>
+
+</main>
+<script src="assets/site.js?v=7" data-root="./" data-page="about"></script>
+<script>
+  document.getElementById('heroIcons').innerHTML = ['scholar', 'github', 'linkedin', 'researchgate', 'behance']
+    .map(k => `<a href="${SR_LINKS[k]}" target="_blank" rel="noopener" aria-label="${k}" title="${k}">${SR_ICON[k]}</a>`).join('');
+</script>
+</body>
+</html>

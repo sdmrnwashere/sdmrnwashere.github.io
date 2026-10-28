@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code · Sadman Rahman</title>
+<meta name="description" content="Research projects and open-source code by Sadman Rahman.">
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=7">
+<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<main class="wrap">
+  <header class="page-head rv">
+    <span class="mono">§ Projects &amp; repositories</span>
+    <h1>Things I <em>build</em>.</h1>
+    <p>Signal-processing and AI systems first, then whatever is public on <a class="link" href="https://github.com/sdmrnwashere" target="_blank" rel="noopener">GitHub</a> (pulled in live).</p>
+  </header>
+
+  <div class="sec-head rv" style="margin-top:10px"><span class="num">§ A</span><h2>Research <em>systems</em></h2></div>
+  <div class="cards three rv">
+    <a class="card hl" href="../cv/#experience">
+      <span class="mono">Biometrics × AI · in development</span>
+      <h3>Private <em>fingerprint</em> attendance</h3>
+      <p>A privacy-preserving, handheld fingerprint-based attendance system for MIST and other universities in Bangladesh. My current Research Assistant project.</p>
+      <div class="foot"><span>MIST · RA</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card ink" href="../cv/#ongoing">
+      <span class="mono">Radar · in preparation</span>
+      <h3>D²-<em>Net</em></h3>
+      <p>Radar–Doppler decomposition that localises human activity from FMCW micro-Doppler signatures.</p>
+      <div class="foot"><span>PyTorch</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="../cv/#ongoing">
+      <span class="mono">LLM · ongoing</span>
+      <h3><em>JPR</em> reviewer</h3>
+      <p>A local peer-review assistant on Llama-3 with LangChain, Ollama and ChromaDB. Nothing leaves the machine.</p>
+      <div class="foot"><span>RAG</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="https://ieeexplore.ieee.org/document/11459382" target="_blank" rel="noopener">
+      <span class="mono">EEG · IEEE Sensors J.</span>
+      <h3>Hat<em>SeqNet</em></h3>
+      <p>Cross-subject driver drowsiness detection from one EEG channel.</p>
+      <div class="foot"><span>Sequence model</span><span class="arrow">↗</span></div>
+    </a>
+    <a class="card" href="https://ieeexplore.ieee.org/document/11594419/" target="_blank" rel="noopener">
+      <span class="mono">Radar · IEEE Sensors Lett.</span>
+      <h3>Sleep <em>posture</em></h3>
+      <p>Depthwise hierarchical temporal network that senses posture transitions during sleep.</p>
+      <div class="foot"><span>Edge DL</span><span class="arrow">↗</span></div>
+    </a>
+    <a class="card" href="../publications/">
+      <span class="mono">Audio · IEEE SPICSCON</span>
+      <h3>Vox<em>Scope</em></h3>
+      <p>Deployment-oriented analysis of extreme vocal distortion in heavy metal. Science, but loud.</p>
+      <div class="foot"><span>Bio-acoustics</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="../publications/">
+      <span class="mono">IMU · IEEE ICACCESS</span>
+      <h3>Form<em>Sense</em></h3>
+      <p>Continuous fatigue and form tracking for resistance workouts with phase-graded IMU analysis.</p>
+      <div class="foot"><span>Wearables</span><span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <section class="sec" style="padding-top:80px">
+    <div class="sec-head rv"><span class="num">§ B</span><h2>On <em>GitHub</em></h2><a class="aside mono ul" href="https://github.com/sdmrnwashere" target="_blank" rel="noopener">@sdmrnwashere ↗</a></div>
+    <div class="cards" id="ghRepos"><p class="mono">Fetching repositories…</p></div>
+  </section>
+</main>
+<script src="../assets/site.js?v=7" data-root="../" data-page="repositories"></script>
+<script>
+  (async () => {
+    const box = document.getElementById('ghRepos');
+    const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    try {
+      const res = await fetch('https://api.github.com/users/sdmrnwashere/repos?per_page=100&sort=updated');
+      if (!res.ok) throw new Error(res.status);
+      const repos = (await res.json()).filter(r => !r.fork && r.name.toLowerCase() !== 'sdmrnwashere.github.io');
+      if (!repos.length) throw new Error('empty');
+      box.innerHTML = repos.map(r => `<a class="card" href="${r.html_url}" target="_blank" rel="noopener">
+        <span class="mono">Updated ${new Date(r.pushed_at).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
+        <h3>${esc(r.name.replace(/[-_]/g, ' '))}</h3>
+        <p>${esc(r.description) || 'No description yet.'}</p>
+        <div class="foot"><span class="lang">${esc(r.language || 'Code')}</span><span>★ ${r.stargazers_count}</span><span class="arrow">↗</span></div>
+      </a>`).join('');
+    } catch (e) {
+      box.innerHTML = `<a class="card" href="https://github.com/sdmrnwashere" target="_blank" rel="noopener"><span class="mono">github.com</span><h3>@sdmrnwashere</h3><p>Browse all repositories on GitHub.</p><div class="foot"><span></span><span class="arrow">↗</span></div></a>`;
+    }
+  })();
+</script>
+</body>
+</html>
