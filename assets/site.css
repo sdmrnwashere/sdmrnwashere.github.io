@@ -69,8 +69,8 @@ kbd { font: 500 10.5px/1 var(--mono); padding: 3px 5px; border: 1px solid var(--
   box-shadow: 0 8px 30px -12px rgba(0,0,0,.18);
 }
 .nav .mono-logo {
-  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none;
-  background: var(--ink); color: var(--bg); font: 600 12.5px/1 var(--mono); letter-spacing: .02em; margin-right: 4px;
+  min-width: 36px; height: 36px; padding: 0 10px; border-radius: 999px; display: grid; place-items: center; flex: none;
+  background: var(--ink); color: var(--bg); font: 600 12px/1 var(--mono); letter-spacing: .06em; margin-right: 4px;
   transition: transform .4s cubic-bezier(.2,1.4,.4,1);
 }
 .nav .mono-logo:hover { transform: rotate(-12deg) scale(1.06); }

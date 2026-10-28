@@ -48,7 +48,7 @@
   const TABS = [['about', 'About', ''], ['publications', 'Papers', 'publications/'], ['cv', 'CV', 'cv/'], ['repositories', 'Code', 'repositories/'], ['misc', 'Misc', 'misc/']];
   const nav = document.createElement('nav');
   nav.className = 'nav'; nav.setAttribute('aria-label', 'Main');
-  nav.innerHTML = `<a class="mono-logo" href="${root}" aria-label="Home">SR</a>` +
+  nav.innerHTML = `<a class="mono-logo" href="${root}" aria-label="Home" title="SdmrnWasHere">SWH</a>` +
     TABS.map(([k, label, href], i) => `<a class="tab${k === page ? ' active' : ''}" href="${root}${href}"${k === page ? ' aria-current="page"' : ''}>${label}<sup>${i + 1}</sup></a>`).join('') +
     `<button class="theme" id="themeBtn" aria-label="Toggle dark mode" title="Theme (T)">${ICON.moon}${ICON.sun}</button>`;
   document.body.prepend(nav);
