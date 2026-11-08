@@ -221,10 +221,17 @@
 
   // ---------- Publications ----------
   const PUBS = [
+    { y: 2026, m: 'EEG', type: 'journal',
+      title: 'MODWT-MRA-Based Activity-Aware Epilepsy Discrimination Using Single-Channel Wearable EEG During Activities of Daily Living',
+      authors: 'Md. Mehedi Hasan Bhuiyan, Sadman Rahman, Mahdia Binte Maksud, Tahiya Iffat Majumder, Kazi Newaj Faisal',
+      venue: 'Results in Engineering', status: 'Published' },
     { y: 2026, m: 'EEG', type: 'journal', sel: true, q: 'Q1',
       title: 'Single-Channel Wearable EEG for ADL Recognition in Healthy and Epileptic Cohorts Using MODWT-MRA and Machine Learning',
       authors: 'Mahdia Binte Maksud, Sadman Rahman, Md. Mehedi Hasan Bhuiyan, Tahiya Iffat Majumder, Kazi Newaj Faisal',
       venue: 'Biomedical Signal Processing and Control', status: 'Accepted', url: 'https://www.sciencedirect.com/science/article/pii/S1746809426021580' },
+    { y: 2026, m: 'ECG', type: 'conference', sel: true,
+      title: 'Short-Term SVMD-Enhanced High-Resolution Time–Frequency Representation for ECG Signal Analysis',
+      authors: 'Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE SPMB', status: 'Accepted' },
     { y: 2026, m: 'IMU', type: 'journal', sel: true, q: 'Q1',
       title: 'Stacking Multi-Variate Time–Frequency Information: A Deep Learning Approach for IMU–MMG Based Hand Gesture Recognition',
       authors: 'Sadman Rahman, Md. Mehedi Hasan Bhuiyan, Nasiruddin Mahmud Himel, Rishi Raj Sharma, Kazi Newaj Faisal',
@@ -241,9 +248,6 @@
       title: 'A Comparative Logic-Style Framework for 8-Bit 12-Function Efficient ALU Design Using Transmission Gate and NMOS Pass Transistor Logic in 90-nm CMOS',
       authors: 'Saquib Farhan, Sadman Rahman, Sanjida Sultana, Md. Tawfiq Amin, Gourab Datta',
       venue: 'Analog Integrated Circuits and Signal Processing', url: 'https://link.springer.com/article/10.1007/s10470-026-02664-5' },
-    { y: 2026, m: 'ECG', type: 'conference',
-      title: 'Short-Term SVMD-Enhanced High-Resolution Time–Frequency Representation for ECG Signal Analysis',
-      authors: 'Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE SPMB', status: 'Accepted' },
     { y: 2026, m: 'IMU', type: 'conference',
       title: 'FormSense: A Continuous Fatigue and Form Tracking Application for Resistance Workout Monitoring Utilizing Phase-Graded IMU Analysis',
       authors: 'Abdullah Al Mahi, Munawar Arif Nitol, Md Mehedi Hasan Bhuiyan, Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE ICACCESS', status: 'Accepted' },
