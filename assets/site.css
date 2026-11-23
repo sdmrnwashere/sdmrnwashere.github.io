@@ -408,3 +408,162 @@ footer .pulse path { stroke-dasharray: 1400; animation: pulse 3.4s linear infini
   .pub { grid-template-columns: 1fr; }
   .pfig { width: 96px; height: 96px; }
 }
+
+/* ---------- Full-width site bar (name left, menu right) ---------- */
+.sitebar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid var(--rule);
+  font-family: Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
+}
+.sitebar-inner { position: relative; max-width: 1120px; margin: 0 auto; padding: 0 28px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.sitebar-name { font-size: 24px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); white-space: nowrap; }
+.sitebar-name:hover { color: var(--accent); }
+.sitebar-menu { display: flex; align-items: center; gap: 4px; }
+.sitebar-menu a.tab { font-size: 17px; padding: 7px 14px; border-radius: 999px; color: var(--muted); transition: color .2s, background-color .2s; white-space: nowrap; }
+.sitebar-menu a.tab:hover { color: var(--ink); background: var(--accent-soft); }
+.sitebar-menu a.tab.active { color: var(--ink); font-weight: 700; background: var(--accent-soft); }
+.sitebar-menu a.talk { margin-left: 8px; font-size: 16px; font-weight: 700; padding: 8px 16px; border-radius: 999px; background: var(--ink); color: var(--bg); white-space: nowrap; transition: background-color .2s; }
+.sitebar-menu a.talk:hover { background: var(--accent); color: #fff; }
+.sitebar .theme { width: 38px; height: 38px; margin-left: 4px; border-radius: 50%; border: 1px solid var(--rule); background: transparent; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+.sitebar .theme:hover { color: var(--ink); }
+.sitebar .theme svg { width: 17px; height: 17px; }
+main.wrap { padding-top: 104px; }
+
+@media (max-width: 860px) {
+  .sitebar-inner { height: auto; flex-wrap: wrap; row-gap: 0; padding: 10px 16px 0; }
+  .sitebar-name { font-size: 21px; }
+  .sitebar-menu { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; padding: 6px 0 10px; margin: 0 -6px; }
+  .sitebar-menu::-webkit-scrollbar { display: none; }
+  .sitebar-menu a.tab { font-size: 16px; padding: 6px 10px; }
+  .sitebar-menu a.talk { display: none; }
+  .sitebar .theme { position: absolute; right: 16px; top: 10px; }
+  main.wrap { padding-top: 120px; }
+  body { padding-bottom: 0; }
+}
+
+/* ---------- Dark-mode contrast for "inverted" panels ----------
+   These panels paint their background with --ink and text with --bg. In dark mode that turns
+   them light-grey with lime accents, which is hard to read, so swap the two locally. */
+:root[data-theme="dark"] :is(.callout, .panel.dark, .card.ink) {
+  --ink: #1D1D25; --bg: #ECEAE4; border: 1px solid #30303A; box-shadow: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :is(.callout, .panel.dark, .card.ink) {
+    --ink: #1D1D25; --bg: #ECEAE4; border: 1px solid #30303A; box-shadow: none;
+  }
+}
+
+/* ---------- Research page: interests + publication summary ---------- */
+.r-block { padding-top: 56px; }
+.r-block:first-of-type { padding-top: 10px; }
+.interest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.interest { padding: 20px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); }
+.interest .mono { color: var(--accent); font-size: 10.5px; }
+.interest h3 { font: 400 25px/1.1 var(--display); margin: 8px 0 14px; }
+.interest h3 em { font-style: italic; color: var(--accent); }
+.interest .tags span { font-size: 12.5px; padding: 4px 9px; }
+.modalities { margin: 16px 0 0; font-size: 14.5px; color: var(--muted); }
+.modalities .mono { margin-right: 10px; color: var(--accent); }
+
+.stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); overflow: hidden; }
+.stat { padding: 20px 18px 18px; display: flex; flex-direction: column; gap: 4px; }
+.stat + .stat { border-left: 1px solid var(--rule); }
+.stat b { font: 400 48px/1 var(--display); letter-spacing: -.02em; color: var(--ink); }
+.stat:first-child b { color: var(--accent); }
+.stat span { font-size: 14px; font-weight: 500; }
+.stat small { font: 500 11px/1.4 var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: .04em; }
+.sum-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-top: 14px; }
+.sum-card { padding: 20px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); }
+.sum-card .mono { display: block; margin-bottom: 14px; }
+.stack { display: flex; height: 14px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.stack i, .lg i { background: var(--accent); opacity: var(--o); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-size: 13.5px; }
+.lg { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.lg:hover { color: var(--accent); }
+.lg i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.lg b { color: var(--ink); font-weight: 600; }
+.years { display: flex; flex-direction: column; gap: 10px; }
+.yr { display: grid; grid-template-columns: 44px 1fr 24px; align-items: center; gap: 10px; font: 500 13px/1 var(--mono); }
+.yr i { height: 10px; border-radius: 999px; background: var(--accent); display: block; }
+.yr b { text-align: right; }
+.sum-card.venues { margin-top: 14px; }
+.sum-card.venues .tags span { font-size: 13px; }
+.sum-card.venues .tags b { color: var(--accent); }
+
+@media (max-width: 980px) {
+  .interest-grid { grid-template-columns: 1fr 1fr; }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .stat:nth-child(4) { border-left: 0; }
+  .stat:nth-child(n+4) { border-top: 1px solid var(--rule); }
+}
+@media (max-width: 760px) {
+  .interest-grid, .sum-row { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(odd) { border-left: 0; }
+  .stat:nth-child(4) { border-left: 1px solid var(--rule); }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .stat b { font-size: 40px; }
+}
+
+/* News: one scrollable box on the home page */
+.log.news-scroll {
+  display: block; max-height: 340px; overflow-y: auto; padding: 4px 18px 4px 20px;
+  border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
+  scrollbar-width: thin; scrollbar-color: var(--faint) transparent;
+}
+.log.news-scroll li { grid-template-columns: 110px 1fr; }
+.log.news-scroll li:last-child { border-bottom: 0; }
+@media (max-width: 760px) { .log.news-scroll { max-height: 380px; padding: 4px 14px; } .log.news-scroll li { grid-template-columns: 1fr; } }
+
+/* ---------- Intro motto (first visit per session) ---------- */
+html.intro::before { content: ""; position: fixed; inset: 0; z-index: 999; background: var(--bg); }
+.intro-screen {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px;
+  background: var(--bg); color: var(--ink);
+  transition: transform .8s cubic-bezier(.7,0,.2,1), opacity .8s;
+}
+.intro-screen p { margin: 0; font: 500 clamp(14px, 2vw, 18px)/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-align: center; }
+.intro-dots i { font-style: normal; color: var(--accent); opacity: 0; }
+.intro-screen.dotting .intro-dots i { animation: dotwave 1.2s ease-in-out infinite; }
+.intro-dots i:nth-child(2) { animation-delay: .1s !important; } .intro-dots i:nth-child(3) { animation-delay: .2s !important; }
+.intro-dots i:nth-child(4) { animation-delay: .3s !important; } .intro-dots i:nth-child(5) { animation-delay: .4s !important; }
+.intro-dots i:nth-child(6) { animation-delay: .5s !important; }
+@keyframes dotwave { 0%, 100% { opacity: .15; } 40% { opacity: 1; } }
+.intro-screen.leave { transform: translateY(-100%); opacity: .6; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Custom cursor (mouse / trackpad only) ---------- */
+html.has-cursor, html.has-cursor * { cursor: none !important; }
+html.has-cursor :is(input, textarea, [contenteditable]) { cursor: text !important; }
+.cur-dot, .cur-ring { position: fixed; top: 0; left: 0; z-index: 1001; pointer-events: none; border-radius: 50%; }
+.cur-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--ink); }
+.cur-ring {
+  width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid var(--accent);
+  transition: width .25s, height .25s, margin .25s, background-color .25s, opacity .25s;
+}
+.cur-ring.hot { width: 56px; height: 56px; margin: -28px 0 0 -28px; background: var(--accent-soft); }
+.cur-ring.down { width: 22px; height: 22px; margin: -11px 0 0 -11px; }
+html.cur-out :is(.cur-dot, .cur-ring), html.intro :is(.cur-dot, .cur-ring) { opacity: 0; }
+
+/* ---------- Scroll progress line + bottom status strip ---------- */
+.progress { position: fixed; left: 0; top: 0; bottom: 0; width: 2px; z-index: 49; background: var(--rule); pointer-events: none; }
+.progress i { display: block; height: 100%; background: var(--accent); transform-origin: top; transform: scaleY(0); }
+.strip {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 48; height: 38px; padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: #15151A; color: #ECEAE4; font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+}
+.strip-now { display: inline-flex; align-items: center; gap: 10px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.strip-now i { width: 6px; height: 6px; border-radius: 50%; background: #C9EE45; flex: none; }
+.strip-now b { color: #C9EE45; font-weight: 500; }
+.strip a { color: #C9EE45; white-space: nowrap; }
+.strip a:hover { text-decoration: underline; text-underline-offset: 3px; }
+body { padding-bottom: 38px; }
+.hint { display: none !important; }
+@media (max-width: 760px) {
+  .strip { height: 34px; padding: 0 14px; font-size: 10.5px; }
+  body { padding-bottom: 34px !important; }
+}
+@media (prefers-reduced-motion: reduce) { .intro-screen { transition: none; } }

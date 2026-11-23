@@ -45,13 +45,22 @@
   window.SR_GLYPH = glyph;
 
   // ---------- Nav ----------
-  const TABS = [['about', 'About', ''], ['publications', 'Papers', 'publications/'], ['cv', 'CV', 'cv/'], ['repositories', 'Code', 'repositories/'], ['misc', 'Misc', 'misc/']];
+  const TABS = [['about', 'About', ''], ['publications', 'Research', 'publications/'], ['cv', 'CV', 'cv/'], ['repositories', 'Code', 'repositories/'], ['misc', 'Misc', 'misc/']];
+  // Calibri where installed (Windows); Carlito is its metric-compatible open twin for everyone else.
+  const carlito = document.createElement('link');
+  carlito.rel = 'stylesheet';
+  carlito.href = 'https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap';
+  document.head.append(carlito);
+
   const nav = document.createElement('nav');
-  nav.className = 'nav'; nav.setAttribute('aria-label', 'Main');
-  nav.innerHTML = `<a class="mono-logo" href="${root}" aria-label="Home" title="SdmrnWasHere">SWH</a>` +
-    TABS.map(([k, label, href], i) => `<a class="tab${k === page ? ' active' : ''}" href="${root}${href}"${k === page ? ' aria-current="page"' : ''}>${label}<sup>${i + 1}</sup></a>`).join('') +
+  nav.className = 'sitebar'; nav.setAttribute('aria-label', 'Main');
+  nav.innerHTML = `<div class="sitebar-inner">
+    <a class="sitebar-name" href="${root}">Sadman Rahman</a>
+    <div class="sitebar-menu">` +
+    TABS.map(([k, label, href], i) => `<a class="tab${k === page ? ' active' : ''}" href="${root}${href}"${k === page ? ' aria-current="page"' : ''}>${label}</a>`).join('') +
     `<a class="talk" href="${LINKS.email}">Let’s talk</a>` +
-    `<button class="theme" id="themeBtn" aria-label="Toggle dark mode" title="Theme (T)">${ICON.moon}${ICON.sun}</button>`;
+    `<button class="theme" id="themeBtn" aria-label="Toggle dark mode" title="Theme (T)">${ICON.moon}${ICON.sun}</button>
+    </div></div>`;
   document.body.prepend(nav);
 
   const toast = document.createElement('div');
@@ -78,13 +87,73 @@
     else if (e.key === '/' && $('#pubSearch')) { e.preventDefault(); $('#pubSearch').focus(); }
   });
 
-  if (matchMedia('(min-width: 761px)').matches) {
-    const hint = document.createElement('div');
-    hint.className = 'hint';
-    hint.innerHTML = '<kbd>1</kbd>–<kbd>5</kbd> jump · <kbd>T</kbd> theme';
-    document.body.append(hint);
-    setTimeout(() => hint.classList.add('gone'), 5000);
+  // ---------- Intro: type the motto once per visit ----------
+  const root_ = document.documentElement;
+  if (root_.classList.contains('intro')) {
+    const MOTTO = 'Hovering';
+    const screen = document.createElement('div');
+    screen.className = 'intro-screen'; screen.setAttribute('aria-hidden', 'true');
+    screen.innerHTML = '<p><span class="intro-text"></span><span class="intro-dots">' + '<i>.</i>'.repeat(6) + '</span></p>';
+    document.body.append(screen);
+    const out = screen.querySelector('.intro-text');
+    let i = 0, done = false, timer;
+    const finish = () => {
+      if (done) return; done = true; clearTimeout(timer);
+      try { sessionStorage.setItem('srIntro', '1'); } catch (e) {}
+      screen.classList.add('leave'); root_.classList.remove('intro');
+      setTimeout(() => screen.parentNode && screen.parentNode.removeChild(screen), 900);
+    };
+    const type = () => {
+      out.textContent = MOTTO.slice(0, ++i);
+      if (i < MOTTO.length) timer = setTimeout(type, i === 1 ? 260 : 70);
+      else { screen.classList.add('dotting'); timer = setTimeout(finish, 1800); }
+    };
+    timer = setTimeout(type, 250);
+    addEventListener('keydown', finish, { once: true });
+    screen.addEventListener('click', finish);
   }
+
+  // ---------- Custom cursor (fine pointers only) ----------
+  if (matchMedia('(pointer: fine)').matches && !reduce) {
+    root_.classList.add('has-cursor');
+    const dot = document.createElement('div'), ring = document.createElement('div');
+    dot.className = 'cur-dot'; ring.className = 'cur-ring';
+    document.body.append(ring, dot);
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px, ${my}px)`; root_.classList.remove('cur-out'); }, { passive: true });
+    document.addEventListener('pointerleave', () => root_.classList.add('cur-out'));
+    addEventListener('pointerdown', () => ring.classList.add('down'));
+    addEventListener('pointerup', () => ring.classList.remove('down'));
+    const HOT = 'a, button, .chip, .chip-link, label, input, canvas, .pub, .card, [role="button"]';
+    document.addEventListener('pointerover', e => ring.classList.toggle('hot', !!e.target.closest(HOT)));
+    const follow = () => { rx += (mx - rx) * .18; ry += (my - ry) * .18; ring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(follow); };
+    follow();
+  }
+
+  // ---------- Scroll progress line + bottom status strip ----------
+  const prog = document.createElement('div');
+  prog.className = 'progress'; prog.innerHTML = '<i></i>';
+  document.body.append(prog);
+  const marks = $$('.hero, .page-head, section.sec, section.r-block, .cv-block').filter(el => !el.closest('footer'));
+  const label = el => {
+    if (el.classList.contains('hero')) return 'Sadman Rahman · signals × AI';
+    const h = el.querySelector('h1, h2');
+    return h ? h.textContent.replace(/[.§]/g, '').trim() : '';
+  };
+  const strip = document.createElement('div');
+  strip.className = 'strip';
+  const pad = n => String(n).padStart(2, '0');
+  strip.innerHTML = `<span class="strip-now"><i></i><b id="stripIdx">01/${pad(marks.length)}</b> <span id="stripLabel">${marks[0] ? label(marks[0]) : ''}</span></span><a href="${LINKS.email}">Let’s talk →</a>`;
+  document.body.append(strip);
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    prog.firstChild.style.transform = `scaleY(${max > 0 ? scrollY / max : 0})`;
+    let cur = 0;
+    marks.forEach((m, k) => { if (m.getBoundingClientRect().top < innerHeight * .4) cur = k; });
+    $('#stripIdx').textContent = `${pad(cur + 1)}/${pad(marks.length)}`;
+    $('#stripLabel').textContent = marks[cur] ? label(marks[cur]) : '';
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // ---------- Footer ----------
   const footer = document.createElement('footer');
@@ -315,6 +384,29 @@
 
   const sel = $('#selectedPubs');
   if (sel) sel.innerHTML = PUBS.filter(p => p.sel).map(pubHTML).join('');
+
+  // ---------- Publication summary (computed from PUBS) ----------
+  const sumBox = $('#pubSummary');
+  if (sumBox) {
+    const isMe = n => n.replace('*', '').trim().startsWith('Sadman Rahman');
+    const firstish = p => {
+      const names = p.authors.split(', ');
+      const i = names.findIndex(isMe);
+      return i === 0 || (i > 0 && names[i].endsWith('*'));  // * on my name = equal contribution / co-first
+    };
+    const tally = f => PUBS.reduce((m, p) => { const k = f(p); m[k] = (m[k] || 0) + 1; return m; }, {});
+    const journals = PUBS.filter(p => p.type === 'journal');
+    const q = tally(p => p.q || 'other');
+    const qLine = ['Q1', 'Q2', 'Q3'].filter(k => q[k]).map(k => `${q[k]} ${k}`).join(' · ');
+    const tiles = [
+      [PUBS.length, 'Peer-reviewed papers', `${Math.min(...PUBS.map(p => p.y))}–${Math.max(...PUBS.map(p => p.y))}`],
+      [journals.length, 'Journal articles', qLine],
+      [PUBS.length - journals.length, 'IEEE conference papers', 'proceedings'],
+      [PUBS.filter(firstish).length, 'First / co-first author', 'incl. equal contribution'],
+      [PUBS.filter(p => p.award).length, 'Paper awards', 'Best Paper · Best Presenter'],
+    ];
+    sumBox.innerHTML = `<div class="stat-grid">${tiles.map(([n, l, sub]) => `<div class="stat"><b>${n}</b><span>${l}</span><small>${sub}</small></div>`).join('')}</div>`;
+  }
 
   const all = $('#allPubs');
   if (all) {

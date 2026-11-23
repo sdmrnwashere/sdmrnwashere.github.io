@@ -258,7 +258,7 @@ PAGE = '''<!DOCTYPE html>
     <link rel="icon" href="../assets/favicon.svg?v=2">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="layout.css?v=4">
+    <link rel="stylesheet" type="text/css" href="layout.css?v=5">
   </head>
 
   <body>

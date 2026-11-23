@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap');
 /* Layout on top of Jon Barron's stylesheet.css: sticky sidebar, news, pills, entries.
    Colours reuse the template's tokens (--text, --accent, --highlight-bg …). */
 
@@ -100,3 +101,8 @@ body { font-size: 15px; line-height: 1.5; }
   .misc-row { grid-template-columns: 124px minmax(0, 1fr); }
   .news li { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* Match the main site's bar: Calibri (Carlito fallback) */
+.topbar { font-family: Calibri, Carlito, "Segoe UI", system-ui, sans-serif; padding-top: 0; padding-bottom: 0; height: 64px; }
+.topbar .brand { font-size: 24px; }
+.topbar nav a { font-size: 17px; }

@@ -9,8 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=11">
-<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="stylesheet" href="../assets/site.css?v=17">
+<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  try { if (!sessionStorage.getItem('srIntro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro'); } catch (e) {}</script>
 </head>
 <body>
 <main class="wrap">
@@ -77,6 +78,6 @@
     </a>
   </div>
 </main>
-<script src="../assets/site.js?v=12" data-root="../" data-page="misc"></script>
+<script src="../assets/site.js?v=18" data-root="../" data-page="misc"></script>
 </body>
 </html>

@@ -4,25 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sadman Rahman</title>
-<meta name="description" content="Journal articles and conference papers by Sadman Rahman, filterable by sensing modality.">
+<meta name="description" content="Research interests, publication summary and all papers by Sadman Rahman.">
 <link rel="icon" href="../assets/favicon.svg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=11">
-<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="stylesheet" href="../assets/site.css?v=17">
+<script>try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  try { if (!sessionStorage.getItem('srIntro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro'); } catch (e) {}</script>
 </head>
 <body>
 <main class="wrap">
   <header class="page-head rv">
-    <span class="mono">§ Publications · <span id="pubCount">15 / 15</span> shown</span>
-    <h1>Papers<em>.</em></h1>
-    <p>Seven journal articles and eight IEEE conference papers. Filter by the signal they listen to, or press <kbd>/</kbd> to search. Also on <a class="link" href="https://scholar.google.com/citations?user=nHt79bkAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    <span class="mono">§ Research · <span id="pubCount">15 / 15</span> papers shown</span>
+    <h1>Research<em>.</em></h1>
+    <p>What I work on, what I’ve published, and every paper in one place. Filter by the signal a paper listens to, or press <kbd>/</kbd> to search. Also on <a class="link" href="https://scholar.google.com/citations?user=nHt79bkAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
   </header>
-  <div class="pub-tools rv" id="pubTools"></div>
+
+  <section class="r-block rv" id="interests">
+    <div class="sec-head"><span class="num">§ A</span><h2>Research <em>interests</em></h2></div>
+    <div class="interest-grid">
+      <div class="interest">
+        <span class="mono">Signal</span>
+        <h3>Signal <em>processing</em></h3>
+        <div class="tags"><span>Time–frequency analysis</span><span>Non-stationary signals</span><span>Wavelets &amp; multiresolution</span><span>Signal decomposition</span><span>Adaptive filtering</span></div>
+      </div>
+      <div class="interest">
+        <span class="mono">AI</span>
+        <h3>Machine &amp; <em>deep learning</em></h3>
+        <div class="tags"><span>Representation learning</span><span>Sequence &amp; temporal models</span><span>Multimodal sensor fusion</span><span>Efficient / edge AI</span><span>Explainable AI</span></div>
+      </div>
+      <div class="interest">
+        <span class="mono">AI</span>
+        <h3>Applied AI &amp; <em>responsible AI</em></h3>
+        <div class="tags"><span>LLM &amp; RAG systems</span><span>Image enhancement</span><span>Privacy-preserving biometrics</span><span>Dataset bias &amp; shortcuts</span></div>
+      </div>
+      <div class="interest">
+        <span class="mono">Signal × AI</span>
+        <h3>Biomedical &amp; <em>human-centred AI</em></h3>
+        <div class="tags"><span>Brain–computer interfaces</span><span>Activity &amp; gesture recognition</span><span>Neurological monitoring</span><span>Wearable sensing</span></div>
+      </div>
+    </div>
+    <p class="modalities"><span class="mono">Modalities</span> EEG · ECG · sEMG · MMG · IMU · FMCW radar micro-Doppler · bio-acoustics</p>
+  </section>
+
+  <section class="r-block rv" id="summary">
+    <div class="sec-head"><span class="num">§ B</span><h2>Publication <em>summary</em></h2></div>
+    <div id="pubSummary"></div>
+  </section>
+
+  <section class="r-block" id="papers">
+    <div class="sec-head rv"><span class="num">§ C</span><h2>All <em>papers</em></h2></div>
+    <div class="pub-tools rv" id="pubTools"></div>
   <ul class="pubs" id="allPubs"></ul>
   <p class="note">* Equal contribution / co-first authorship.</p>
+  </section>
 </main>
-<script src="../assets/site.js?v=12" data-root="../" data-page="publications"></script>
+<script src="../assets/site.js?v=18" data-root="../" data-page="publications"></script>
 </body>
 </html>
