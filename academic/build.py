@@ -153,6 +153,30 @@ SECTIONS = [('about', 'About Me'), ('news', 'News'), ('publications', 'Publicati
             ('education', 'Education'), ('awards', 'Awards'), ('misc', 'Service &amp; More')]
 
 
+IMG = {  # title prefix -> figure thumbnail in images/papers/ (main + _b hover), taken from the paper PDFs
+    'MODWT-MRA-Based Activity-Aware': 'rie',
+    'Single-Channel Wearable EEG for ADL': 'bspc',
+    'Short-Term SVMD': 'svmd',
+    'Stacking Multi-Variate': 'imummg',
+    'HatSeqNet': 'hatseq',
+    'Radar-Based Sleep Posture': 'sleep',
+    'A Comparative Logic-Style': 'alu_j',
+    'Exploring Gamma-Band': 'gamma',
+    'Improved FMCW Radar': 'sethar',
+    'Leveraging Power-Spectrum': 'cough',
+    'Neural Network Enhanced PID': 'pid',
+    'GCAF-Net': 'gcaf',
+    'High-Speed, Low-Power 8-Bit': 'alu_c',
+}
+
+
+def thumb(p):
+    for prefix, key in IMG.items():
+        if p['t'].startswith(prefix):
+            return f'images/papers/{key}.jpg', f'images/papers/{key}_b.jpg'
+    return f"images/{p['k']}.svg", f"images/{p['k']}_tf.svg"
+
+
 def authors(a):
     return ', '.join(f'<strong>{E(n)}</strong>' if n.startswith(ME) else f'<span class="author">{E(n)}</span>'
                      for n in a.split(', '))
@@ -168,12 +192,12 @@ def article(p):
     if p.get('award'):
         venue += f' &nbsp;<strong class="award">{p["award"]}</strong>'
     pills = f'<a class="pill" href="{url}">{p.get("lname", "Paper")}</a>' if url else '<span class="pill muted">Link soon</span>'
-    k = p['k']
+    t1, t2 = thumb(p)
     return f'''      <article class="paper{' highlighted' if p.get('hl') else ''}">
         <div class="paper-media">
           <div class="one">
-            <div class="two"><img src="images/{k}_tf.svg" alt="" width="160" height="160"></div>
-            <img src="images/{k}.svg" alt="{k.upper()} signal" width="160" height="160">
+            <div class="two"><img src="{t2}" alt="" width="160" height="160" loading="lazy"></div>
+            <img src="{t1}" alt="Figure from: {E(p['t'][:60])}" width="160" height="160" loading="lazy">
           </div>
         </div>
         <div class="paper-info">
@@ -282,7 +306,7 @@ __NEWS__
 
         <section id="publications" class="block">
           <h2>Publications <a class="h2-link" href="https://scholar.google.com/citations?user=nHt79bkAAAAJ&amp;hl=en">[Google Scholar]</a></h2>
-          <p class="note">15 papers: 7 journal articles and 8 IEEE conference papers. Representative papers are <span class="highlight">highlighted</span>; * denotes equal contribution. Hover a thumbnail for its time–frequency view.</p>
+          <p class="note">15 papers: 7 journal articles and 8 IEEE conference papers. Representative papers are <span class="highlight">highlighted</span>; * denotes equal contribution. Hover a thumbnail to see a second figure from the paper.</p>
           <div class="papers">
 __PAPERS__
           </div>

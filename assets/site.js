@@ -291,11 +291,17 @@
   ];
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // Figure thumbnails extracted from the paper PDFs (academic/images/papers/{key}.jpg + {key}_b.jpg on hover)
+  const FIG = [['MODWT-MRA-Based Activity-Aware', 'rie'], ['Single-Channel Wearable EEG for ADL', 'bspc'], ['Short-Term SVMD', 'svmd'],
+    ['Stacking Multi-Variate', 'imummg'], ['HatSeqNet', 'hatseq'], ['Radar-Based Sleep Posture', 'sleep'], ['A Comparative Logic-Style', 'alu_j'],
+    ['Exploring Gamma-Band', 'gamma'], ['Improved FMCW Radar', 'sethar'], ['Leveraging Power-Spectrum', 'cough'],
+    ['Neural Network Enhanced PID', 'pid'], ['GCAF-Net', 'gcaf'], ['High-Speed, Low-Power 8-Bit', 'alu_c']];
+  const figFor = p => (FIG.find(([pre]) => p.title.startsWith(pre)) || [])[1];
   const pubHTML = p => {
     const authors = esc(p.authors).split(', ').map(a => a.startsWith('Sadman Rahman') ? `<b>${a}</b>` : a).join(', ');
     const title = p.url ? `<a href="${p.url}" target="_blank" rel="noopener">${esc(p.title)}</a>` : esc(p.title);
     return `<li class="pub">
-      <div class="sig">${glyph(p.m)}<span>${p.m} · ${p.type === 'journal' ? 'Journal' : 'Conf.'}</span></div>
+      <div class="sig">${figFor(p) ? `<span class="pfig"><img src="${root}academic/images/papers/${figFor(p)}.jpg" alt="" loading="lazy"><img src="${root}academic/images/papers/${figFor(p)}_b.jpg" alt="" loading="lazy"></span>` : glyph(p.m)}<span>${p.m} · ${p.type === 'journal' ? 'Journal' : 'Conf.'}</span></div>
       <div><h3>${title}</h3><p class="authors">${authors}</p>
         <div class="venue"><i>${esc(p.venue)}</i>
           ${p.q ? `<span class="pill${p.q === 'Q1' ? ' q1' : ''}">${p.q}</span>` : ''}
