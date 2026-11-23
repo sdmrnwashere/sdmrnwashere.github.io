@@ -50,6 +50,7 @@
   nav.className = 'nav'; nav.setAttribute('aria-label', 'Main');
   nav.innerHTML = `<a class="mono-logo" href="${root}" aria-label="Home" title="SdmrnWasHere">SWH</a>` +
     TABS.map(([k, label, href], i) => `<a class="tab${k === page ? ' active' : ''}" href="${root}${href}"${k === page ? ' aria-current="page"' : ''}>${label}<sup>${i + 1}</sup></a>`).join('') +
+    `<a class="talk" href="${LINKS.email}">Let’s talk</a>` +
     `<button class="theme" id="themeBtn" aria-label="Toggle dark mode" title="Theme (T)">${ICON.moon}${ICON.sun}</button>`;
   document.body.prepend(nav);
 
@@ -104,6 +105,20 @@
   $('#copyEmail').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText('sdmrnwashere@gmail.com'); say('✓ email copied'); } catch (e) { location.href = LINKS.email; }
   });
+
+  // ---------- Lab log: show the newest six, toggle the rest ----------
+  const log = $('#log'), more = $('#logMore');
+  if (log && more) {
+    if (log.children.length <= 6) more.remove();
+    else {
+      log.classList.add('collapsed');
+      more.addEventListener('click', () => {
+        const open = log.classList.toggle('collapsed') === false;
+        more.textContent = open ? 'Show fewer ↑' : 'Show all updates ↓';
+        more.setAttribute('aria-expanded', open);
+      });
+    }
+  }
 
   // ---------- Reveal on scroll ----------
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' });
@@ -318,6 +333,8 @@
       active = filters.find(f => f[0] === b.dataset.k)[2]; render();
     }));
     $('#pubSearch').addEventListener('input', e => { query = e.target.value; render(); });
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) { query = q; $('#pubSearch').value = q; }
     render();
   }
 })();

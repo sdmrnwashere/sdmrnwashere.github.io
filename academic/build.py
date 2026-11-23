@@ -1,5 +1,6 @@
-"""Builds academic/index.html (Jon Barron template layout) from the paper list below.
-Run from the repo root: python -I <this file>"""
+"""Builds academic/index.html from the data below.
+Base: Jon Barron's template (stylesheet.css); layout ideas from Zhexin Liang, Rui Li and Ziqi Huang (layout.css).
+Run from the repo root: python -I academic/build.py"""
 import html
 
 E = html.escape
@@ -65,6 +66,93 @@ pubs = [
 ]
 
 
+
+SHORT = {  # short venue tags shown in bold after the venue, Rui-Li style
+    'Results in Engineering': 'RINENG', 'Biomedical Signal Processing and Control': 'BSPC',
+    'IEEE Sensors Journal': 'IEEE JSEN', 'IEEE Sensors Letters': 'IEEE LSENS',
+    'Analog Integrated Circuits and Signal Processing': 'AICSP',
+}
+
+NEWS = [
+    ('2026.11', 'Paper on activity-aware epilepsy discrimination from wearable EEG published in <b>Results in Engineering</b>.'),
+    ('2026', 'Joined <a href="https://mist.ac.bd/">MIST</a> as a <b>Research Assistant</b>, working on a privacy-preserving fingerprint attendance system.'),
+    ('2026', 'Wearable-EEG activity recognition in epileptic cohorts accepted in <b>Biomedical Signal Processing and Control</b> (Q1).'),
+    ('2026.10', 'Started my <b>M.Sc.</b> in EEE at BUET with Dr. Shaikh Anowarul Fattah.'),
+    ('2026.06', 'Graduated from MIST, ranked <b>2nd of 97</b> (CGPA 3.94/4.00).'),
+    ('2026', 'Received the <span class="award">Best Presenter Award</span> at IEEE QPAIN 2026.'),
+    ('2026', 'Two first-author papers published in <b>IEEE Sensors Journal</b>: HatSeqNet and IMU–MMG gesture recognition.'),
+    ('2026', 'Papers accepted at <b>IEEE SPMB</b>, <b>ICACCESS</b> and <b>SPICSCON</b>.'),
+    ('2025', 'Received the <span class="award">Best Paper Award</span> at IEEE SPICSCON 2025.'),
+    ('2025.06', 'Became Chairperson of the IEEE MIST Student Branch and founded its Signal Processing Society chapter.'),
+]
+
+INTERESTS = ['Time–frequency signal processing', 'Efficient deep learning', 'Applied AI &amp; LLM systems',
+             'Biomedical &amp; wearable sensing', 'EEG · ECG · IMU · radar · audio']
+
+EXPERIENCE = [
+    ('mist', 'MIST', 'Research Assistant', 'Military Institute of Science and Technology (MIST)', '2026 – present',
+     'Developing a privacy-preserving, handheld fingerprint-based automated attendance system for MIST and higher education institutions in Bangladesh.'),
+    ('insia', 'INSIA Lab', 'Co-founder', '<a href="https://www.insia-lab.com/home">INSIA Lab</a>', 'May 2024 – present',
+     'Grew the lab from 3 to 49 members and delivered 15 multidisciplinary projects.'),
+    ('gp', 'Grameenphone', 'Industrial Engineering Trainee', 'Grameenphone (Telenor Group)', 'May 2025 – Jun 2025',
+     'Studied operational workflows across IT, network and technology functions; presented a KPI-based report.'),
+]
+
+EDUCATION = [
+    ('buet', 'BUET', 'M.Sc. in Electrical and Electronic Engineering', 'Bangladesh University of Engineering and Technology', 'Oct 2026 – present',
+     'Advisor: Dr. Shaikh Anowarul Fattah · Communication and Signal Processing'),
+    ('mist', 'MIST', 'B.Sc. in Electrical and Electronics Engineering', 'Military Institute of Science and Technology', 'Aug 2022 – Jun 2026',
+     'CGPA 3.94/4.00, ranked 2nd of 97 · Advisor: Dr. Kazi Newaj Faisal · Dean’s List all four years · '
+     '<a href="https://drive.google.com/file/d/1nussQ8lhKcv6y55IxThQaBtG5Z_6y9ze/view?usp=sharing">thesis slides</a>'),
+    ('milestone', 'Milestone College', 'Higher Secondary Certificate, Science', 'Milestone College, Dhaka', 'Mar 2019 – Jan 2022',
+     'GPA 5.00/5.00'),
+]
+
+AWARDS = [
+    ('Best Paper Award', 'IEEE SPICSCON 2025'), ('Best Presenter Award', 'IEEE QPAIN 2026'),
+    ('Finalist', 'BEAR Summit &amp; National Semiconductor Symposium 2025'), ('2nd Runner-up', 'BEAR Summit Biotech Poster Showcase 2025'),
+    ('2nd Runner-up', 'IEEE Photonics &amp; EDS Poster Designing Contest 2024'), ('Dean’s List &amp; Merit Scholarship', 'MIST, all four years'),
+]
+
+MISC = [
+    ('#aaba9e', 'Service', [
+        'Reviewer, IEEE Transactions on Affective Computing',
+        'Chairperson, IEEE MIST Student Branch, 2025–2026',
+        'Founding Chair, IEEE Signal Processing Society MIST SB Chapter, 2025–2026',
+        'Secretary General, MIST Robotics Club, 2025–2026']),
+    ('#c6b89e', 'Teaching', [
+        'Instructor, Hands-on Arduino 3.0 and Pixel Pulse (150+ students)',
+        'Organiser, 11+ signal processing workshops with BUET and DU',
+        'Interests: Signals and Systems, DSP, Circuits, Digital Logic, Microcontrollers, Machine Learning']),
+    ('#b9c9de', 'Design', [
+        'Former professional graphic designer: <a href="https://www.behance.net/sadmanrahman1">portfolio on Behance</a>',
+        '<a href="../">Interactive version of this site</a>']),
+]
+
+ICON = {
+    'pin': '<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
+    'mail': '<svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4 7.3V17h16V7.3l-8 4.9zM5.2 7l6.8 4.1L18.8 7H5.2z"/></svg>',
+    'scholar': '<svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.8 9.6v3.9L12 20l6.8-3.5v-3.9L12 16.3l-6.8-3.7z"/></svg>',
+    'github': '<svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>',
+    'linkedin': '<svg viewBox="0 0 24 24"><path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9.5h3V19zM6.5 8.2a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM19 19h-3v-4.6c0-1.1 0-2.5-1.5-2.5S12.8 13 12.8 14.3V19h-3V9.5h2.9v1.3c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.6V19z"/></svg>',
+    'rg': '<svg viewBox="0 0 24 24"><path d="M3 2h18a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm6.9 6.2c-2 0-3.3 1.4-3.3 3.8v.5c0 2.4 1.3 3.8 3.3 3.8 1 0 1.8-.3 2.4-.9v-3.1H9.8v1.2h1.1v1.4c-.2.2-.6.3-1 .3-1.1 0-1.7-.9-1.7-2.6V12c0-1.7.6-2.6 1.7-2.6.8 0 1.2.4 1.3 1.2h1.5c-.2-1.5-1.2-2.4-2.8-2.4zm7.3-2.4c-1.3 0-2.1.8-2.1 2.1v.4h1.2v-.4c0-.6.3-1 .9-1s.9.3.9 1-.3 1-1.1 1.7l-1.8 1.6V12h4.2v-1.1h-2.4l1-.9c1.1-.9 1.6-1.6 1.6-2.5 0-1.1-.9-1.7-2.4-1.7z"/></svg>',
+    'cv': '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8 13h8v1.5H8V13zm0 3h6v1.5H8V16z"/></svg>',
+}
+
+SIDE_LINKS = [
+    ('pin', 'Dhaka, Bangladesh', None),
+    ('mail', 'Email', 'mailto:sdmrnwashere@gmail.com'),
+    ('scholar', 'Google Scholar', 'https://scholar.google.com/citations?user=nHt79bkAAAAJ&amp;hl=en'),
+    ('github', 'GitHub', 'https://github.com/sdmrnwashere'),
+    ('linkedin', 'LinkedIn', 'https://www.linkedin.com/in/sadman-rahman-2412b0339/'),
+    ('rg', 'ResearchGate', 'https://www.researchgate.net/profile/Sadman-Rahman-5'),
+    ('cv', 'CV (PDF)', '../assets/Sadman_Rahman_CV.pdf'),
+]
+
+SECTIONS = [('about', 'About Me'), ('news', 'News'), ('publications', 'Publications'), ('experience', 'Experience'),
+            ('education', 'Education'), ('awards', 'Awards'), ('misc', 'Service &amp; More')]
+
+
 def authors(a):
     return ', '.join(f'<strong>{E(n)}</strong>' if n.startswith(ME) else f'<span class="author">{E(n)}</span>'
                      for n in a.split(', '))
@@ -73,12 +161,13 @@ def authors(a):
 def article(p):
     url = p.get('url')
     title = f'<a href="{url}" class="papertitle">{E(p["t"])}</a>' if url else f'<span class="papertitle">{E(p["t"])}</span>'
-    venue = f'<em>{E(p["v"])}</em>, {p["y"]}'
+    tag = SHORT.get(p['v'], p['v'].replace('IEEE ', ''))
+    venue = f'<em>{E(p["v"])}</em> (<b>{E(tag)}</b>), {p["y"]}'
     if p.get('note'):
         venue += f' {p["note"]}'
     if p.get('award'):
-        venue += f' &nbsp;<strong class="award">({p["award"]})</strong>'
-    links = f'\n          <div class="paper-links"><a href="{url}">{p.get("lname", "paper")}</a></div>' if url else ''
+        venue += f' &nbsp;<strong class="award">{p["award"]}</strong>'
+    pills = f'<a class="pill" href="{url}">{p.get("lname", "Paper")}</a>' if url else '<span class="pill muted">Link soon</span>'
     k = p['k']
     return f'''      <article class="paper{' highlighted' if p.get('hl') else ''}">
         <div class="paper-media">
@@ -90,49 +179,41 @@ def article(p):
         <div class="paper-info">
           {title}
           <div class="paper-authors">{authors(p["a"])}</div>
-          <div class="paper-venue">{venue}</div>{links}
-          <p class="paper-desc">{E(p["d"])}</p>
+          <div class="paper-venue">{venue}</div>
+          <div class="pills">{pills}</div>
+          <p class="paper-desc"><b class="tldr">TL;DR:</b> {E(p["d"])}</p>
         </div>
       </article>'''
+
+
+def entry(logo, alt, title, where, when, desc):
+    return f'''        <div class="entry">
+          <div class="logo"><img src="images/logos/{logo}.png" alt="{alt} logo" loading="lazy"></div>
+          <div><div class="entry-head"><b>{title}</b> | {where}<span class="when">{when}</span></div>
+          <div class="entry-desc">{desc}</div></div>
+        </div>'''
 
 
 def misc_row(color, title, items):
     rows = '\n'.join(f'            <div>{i}</div>' for i in items)
     return f'''      <div class="misc-row">
-        <div class="misc-badge">
-          <div class="colored-box" style="background-color: {color};">
-            <h2>{title}</h2>
-          </div>
-        </div>
+        <div class="misc-badge"><div class="colored-box" style="background-color: {color};"><h2>{title}</h2></div></div>
         <div class="misc-links">
 {rows}
         </div>
       </div>'''
 
 
-MISC = [
-    ('#fcb97d', 'Experience', [
-        'Research Assistant, <a href="https://mist.ac.bd/">MIST</a>, 2026–present',
-        'Co-founder, <a href="https://www.insia-lab.com/home">INSIA Lab</a>, 2024–present',
-        'Industrial Engineering Trainee, Grameenphone (Telenor Group), 2025']),
-    ('#aaba9e', 'Service', [
-        'Reviewer, IEEE Transactions on Affective Computing',
-        'Chairperson, IEEE MIST Student Branch, 2025–2026',
-        'Founding Chair, IEEE Signal Processing Society MIST SB Chapter, 2025–2026',
-        'Secretary General, MIST Robotics Club, 2025–2026']),
-    ('#c6b89e', 'Teaching', [
-        'Instructor, Hands-on Arduino 3.0 and Pixel Pulse (150+ students)',
-        'Organiser, 11+ signal processing workshops with BUET and DU',
-        'Teaching interests: Signals and Systems, DSP, Circuits, Digital Logic, Microcontrollers, Machine Learning']),
-    ('#edd892', 'Awards', [
-        'Best Paper Award, IEEE SPICSCON 2025',
-        'Best Presenter Award, IEEE QPAIN 2026',
-        'Finalist and 2nd Runner-up (Biotech Poster), BEAR Summit, 2025',
-        "Dean's List and Merit Scholarship, MIST, all four years"]),
-    ('#b9c9de', 'Design', [
-        'Former professional graphic designer: <a href="https://www.behance.net/sadmanrahman1">portfolio on Behance</a>',
-        '<a href="../">Interactive version of this site</a>']),
-]
+def side_item(i, t, u):
+    label = f'<a href="{u}">{t}</a>' if u else f'<span>{t}</span>'
+    return f'          <li>{ICON[i]}{label}</li>'
+
+
+sidebar = '\n'.join(side_item(*s) for s in SIDE_LINKS)
+quick = '\n'.join(f'            <a href="#{k}">{t}</a>' for k, t in SECTIONS)
+news = '\n'.join(f'          <li><span class="date">{d}</span><span>{t}</span></li>' for d, t in NEWS)
+interests = '\n'.join(f'            <li>{i}</li>' for i in INTERESTS)
+awards = '\n'.join(f'          <li><b>{a}</b>, {w}</li>' for a, w in AWARDS)
 
 PAGE = '''<!DOCTYPE html>
 <html lang="en">
@@ -151,64 +232,104 @@ PAGE = '''<!DOCTYPE html>
     <link rel="icon" href="../assets/favicon.svg?v=2">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <style>
-      .paper-media .one img { border: 1px solid var(--border); }
-      .misc-links > div { margin: 2px 0; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="layout.css?v=4">
   </head>
 
   <body>
-    <main class="page">
-      <header class="bio">
-        <div class="bio-text">
-          <h1 class="name">Sadman Rahman</h1>
-          <p>
-            I'm an M.Sc. student in Electrical and Electronic Engineering at <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology (BUET)</a>, advised by Dr. Shaikh Anowarul Fattah, and a Research Assistant at <a href="https://mist.ac.bd/">MIST</a>, where I'm developing a privacy-preserving, fingerprint-based attendance system for universities in Bangladesh.
-          </p>
-          <p>
-            I did my B.Sc. in Electrical and Electronic Engineering at the <a href="https://mist.ac.bd/">Military Institute of Science and Technology (MIST)</a> with Dr. Kazi Newaj Faisal, graduating 2nd of 97 with a CGPA of 3.94/4.00. I co-founded <a href="https://www.insia-lab.com/home">INSIA Lab</a>, and my work has received the Best Paper Award at IEEE SPICSCON 2025 and the Best Presenter Award at IEEE QPAIN 2026.
-          </p>
-          <p class="bio-links">
-            <a href="mailto:sdmrnwashere@gmail.com">Email</a> &nbsp;/&nbsp;
-            <a href="../assets/Sadman_Rahman_CV.pdf">CV</a> &nbsp;/&nbsp;
-            <a href="https://scholar.google.com/citations?user=nHt79bkAAAAJ&amp;hl=en">Scholar</a> &nbsp;/&nbsp;
-            <a href="https://github.com/sdmrnwashere">GitHub</a> &nbsp;/&nbsp;
-            <a href="https://www.linkedin.com/in/sadman-rahman-2412b0339/">LinkedIn</a> &nbsp;/&nbsp;
-            <a href="https://www.researchgate.net/profile/Sadman-Rahman-5">ResearchGate</a>
-          </p>
-        </div>
-        <div class="bio-photo">
-          <a href="images/sadman.jpg"><img src="images/sadman.jpg" alt="Sadman Rahman" width="405" height="405"></a>
-        </div>
-      </header>
+    <header class="topbar">
+      <a class="brand" href="#about">Sadman Rahman</a>
+      <nav>__TOPNAV__</nav>
+    </header>
 
-      <section class="section-header">
-        <h2>Research</h2>
-        <p>
-          I'm interested in signal processing, deep learning, and applied AI, especially for biomedical and wearable sensing. Much of my work builds sharper time–frequency representations of non-stationary signals (EEG, ECG, IMU, radar, and audio) and compact neural networks that learn from them and can run on edge devices. I'm looking for Ph.D. positions. Representative papers are <span class="highlight">highlighted</span>; * denotes equal contribution.
-        </p>
-      </section>
+    <div class="layout">
+      <aside class="sidebar">
+        <img class="avatar" src="images/sadman.jpg" alt="Sadman Rahman" width="405" height="405">
+        <h1 class="side-name">Sadman Rahman</h1>
+        <p class="side-role">M.Sc. Student @ BUET<br>Research Assistant @ MIST</p>
+        <ul class="side-links">
+__SIDEBAR__
+        </ul>
+        <nav class="quick" aria-label="Quick links">
+          <span>Quick links</span>
+__QUICK__
+        </nav>
+      </aside>
 
-      <section class="papers">
+      <main class="main">
+        <section id="about" class="block">
+          <h2>About Me</h2>
+          <div class="about">
+            <div class="about-text">
+              <p>I'm an M.Sc. student in Electrical and Electronic Engineering at <a href="https://www.buet.ac.bd/">Bangladesh University of Engineering and Technology (BUET)</a>, advised by Dr. Shaikh Anowarul Fattah, and a Research Assistant at <a href="https://mist.ac.bd/">MIST</a>, where I'm developing a privacy-preserving, fingerprint-based attendance system for universities in Bangladesh.</p>
+              <p>I did my B.Sc. in EEE at the <a href="https://mist.ac.bd/">Military Institute of Science and Technology (MIST)</a> with Dr. Kazi Newaj Faisal, graduating 2nd of 97. My research builds sharper time–frequency representations of non-stationary signals and compact neural networks that learn from them, for biomedical and wearable sensing. I co-founded <a href="https://www.insia-lab.com/home">INSIA Lab</a>.</p>
+            </div>
+            <div class="interests">
+              <h3>Research Interests</h3>
+              <ul>
+__INTERESTS__
+              </ul>
+            </div>
+          </div>
+          <p class="cta">I'm looking for Ph.D. positions in signal processing and AI. If you think we'd be a good fit, feel free to <a href="mailto:sdmrnwashere@gmail.com">email me</a>.</p>
+        </section>
+
+        <section id="news" class="block">
+          <h2>News</h2>
+          <ul class="news">
+__NEWS__
+          </ul>
+        </section>
+
+        <section id="publications" class="block">
+          <h2>Publications <a class="h2-link" href="https://scholar.google.com/citations?user=nHt79bkAAAAJ&amp;hl=en">[Google Scholar]</a></h2>
+          <p class="note">15 papers: 7 journal articles and 8 IEEE conference papers. Representative papers are <span class="highlight">highlighted</span>; * denotes equal contribution. Hover a thumbnail for its time–frequency view.</p>
+          <div class="papers">
 __PAPERS__
-      </section>
+          </div>
+        </section>
 
-      <section class="section-header">
-        <h2>Miscellanea</h2>
-      </section>
+        <section id="experience" class="block">
+          <h2>Experience</h2>
+__EXPERIENCE__
+        </section>
 
-      <section class="misc">
+        <section id="education" class="block">
+          <h2>Education</h2>
+__EDUCATION__
+        </section>
+
+        <section id="awards" class="block">
+          <h2>Awards</h2>
+          <ul class="awards">
+__AWARDS__
+          </ul>
+        </section>
+
+        <section id="misc" class="block">
+          <h2>Service &amp; More</h2>
+          <div class="misc">
 __MISC__
-      </section>
+          </div>
+        </section>
 
-      <footer class="site-footer">
-        <p>
-          Website template from <a href="https://github.com/jonbarron/jonbarron.github.io">Jon Barron's source code</a>. Thanks, Jon!
-        </p>
-      </footer>
-    </main>
+        <footer class="site-footer">
+          <p>Website template from <a href="https://github.com/jonbarron/jonbarron.github.io">Jon Barron's source code</a>. Thanks, Jon!<br>
+          Layout ideas from <a href="https://zhexinliang.github.io/">Zhexin Liang</a>, <a href="https://ruili3.github.io/">Rui Li</a> and <a href="https://ziqihuangg.github.io/">Ziqi Huang</a>.</p>
+        </footer>
+      </main>
+    </div>
 
     <script>
+      // Quick links: highlight the section in view.
+      var links = document.querySelectorAll('.quick a, .topbar nav a');
+      var spy = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function(l) { l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id); });
+        });
+      }, {rootMargin: '-35% 0px -60% 0px'});
+      document.querySelectorAll('section.block').forEach(function(s) { spy.observe(s); });
+
       // Tap a thumbnail on touch screens to see its time-frequency view (adapted from the template).
       document.querySelectorAll('.paper').forEach(function(card) {
         var thumb = card.querySelector('.one');
@@ -219,7 +340,7 @@ __MISC__
         thumb.addEventListener('touchend', function() {
           if (moved) return;
           var active = !card.classList.contains('hover-active');
-          document.querySelectorAll('.paper.hover-active').forEach(function(other) { other.classList.remove('hover-active'); });
+          document.querySelectorAll('.paper.hover-active').forEach(function(o) { o.classList.remove('hover-active'); });
           if (active) card.classList.add('hover-active');
         }, {passive: true});
       });
@@ -228,7 +349,15 @@ __MISC__
 </html>
 '''
 
-page = PAGE.replace('__PAPERS__', '\n'.join(article(p) for p in pubs)).replace('__MISC__', '\n'.join(misc_row(*m) for m in MISC))
+page = (PAGE
+        .replace('__TOPNAV__', ''.join(f'<a href="#{k}">{t}</a>' for k, t in SECTIONS[:5]))
+        .replace('__SIDEBAR__', sidebar).replace('__QUICK__', quick)
+        .replace('__INTERESTS__', interests).replace('__NEWS__', news)
+        .replace('__PAPERS__', '\n'.join(article(p) for p in pubs))
+        .replace('__EXPERIENCE__', '\n'.join(entry(*e) for e in EXPERIENCE))
+        .replace('__EDUCATION__', '\n'.join(entry(*e) for e in EDUCATION))
+        .replace('__AWARDS__', awards)
+        .replace('__MISC__', '\n'.join(misc_row(*m) for m in MISC)))
 with open('academic/index.html', 'w', encoding='utf-8') as f:
     f.write(page)
 print(len(pubs), 'papers written')
