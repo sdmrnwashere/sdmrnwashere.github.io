@@ -265,10 +265,10 @@
       venue: 'Analog Integrated Circuits and Signal Processing', url: 'https://link.springer.com/article/10.1007/s10470-026-02664-5' },
     { y: 2026, m: 'IMU', type: 'conference',
       title: 'FormSense: A Continuous Fatigue and Form Tracking Application for Resistance Workout Monitoring Utilizing Phase-Graded IMU Analysis',
-      authors: 'Abdullah Al Mahi, Munawar Arif Nitol, Md Mehedi Hasan Bhuiyan, Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE ICACCESS', status: 'Accepted' },
+      authors: 'Abdullah Al Mahi*, Munawar Arif Nitol*, Md. Mehedi Hasan Bhuiyan*, Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE iCACCESS', status: 'Accepted' },
     { y: 2026, m: 'Audio', type: 'conference', sel: true,
       title: 'VoxScope: A Deployment-Oriented Analysis Framework for Extreme Vocal Distortion Techniques in Heavy Metal',
-      authors: 'Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE SPICSCON', status: 'Accepted' },
+      authors: 'Md. Mehedi Hasan Bhuiyan, Fahmid Amin Zawad, Sadman Rahman, Kazi Newaj Faisal', venue: 'IEEE SPICSCON', status: 'Accepted' },
     { y: 2026, m: 'EEG', type: 'conference', award: 'Best Presenter',
       title: 'Exploring Gamma-Band Filtered Features and Machine Learning for Resource-Efficient Multi-Level Cognitive Load Classification Using EEG',
       authors: 'Nur Md. Atiquzzaman Rasel, Sadman Rahman*, Kazi Newaj Faisal', venue: 'IEEE QPAIN', url: 'https://ieeexplore.ieee.org/abstract/document/11545759' },
@@ -295,7 +295,7 @@
   const FIG = [['MODWT-MRA-Based Activity-Aware', 'rie'], ['Single-Channel Wearable EEG for ADL', 'bspc'], ['Short-Term SVMD', 'svmd'],
     ['Stacking Multi-Variate', 'imummg'], ['HatSeqNet', 'hatseq'], ['Radar-Based Sleep Posture', 'sleep'], ['A Comparative Logic-Style', 'alu_j'],
     ['Exploring Gamma-Band', 'gamma'], ['Improved FMCW Radar', 'sethar'], ['Leveraging Power-Spectrum', 'cough'],
-    ['Neural Network Enhanced PID', 'pid'], ['GCAF-Net', 'gcaf'], ['High-Speed, Low-Power 8-Bit', 'alu_c']];
+    ['Neural Network Enhanced PID', 'pid'], ['GCAF-Net', 'gcaf'], ['High-Speed, Low-Power 8-Bit', 'alu_c'], ['VoxScope', 'vox'], ['FormSense', 'form']];
   const figFor = p => (FIG.find(([pre]) => p.title.startsWith(pre)) || [])[1];
   const pubHTML = p => {
     const authors = esc(p.authors).split(', ').map(a => a.startsWith('Sadman Rahman') ? `<b>${a}</b>` : a).join(', ');

@@ -34,10 +34,10 @@ pubs = [
          url='https://link.springer.com/article/10.1007/s10470-026-02664-5',
          d='Compares transmission-gate and NMOS pass-transistor logic styles for an efficient 8-bit, 12-function ALU in 90 nm CMOS.'),
     dict(k='imu', t='FormSense: A Continuous Fatigue and Form Tracking Application for Resistance Workout Monitoring Utilizing Phase-Graded IMU Analysis',
-         a='Abdullah Al Mahi, Munawar Arif Nitol, Md Mehedi Hasan Bhuiyan, Sadman Rahman, Kazi Newaj Faisal', v='IEEE ICACCESS', y=2026, note='(accepted)',
+         a='Abdullah Al Mahi*, Munawar Arif Nitol*, Md. Mehedi Hasan Bhuiyan*, Sadman Rahman, Kazi Newaj Faisal', v='IEEE iCACCESS', y=2026, note='(accepted)',
          d='An application that tracks fatigue and exercise form during resistance workouts using phase-graded IMU analysis.'),
     dict(k='audio', t='VoxScope: A Deployment-Oriented Analysis Framework for Extreme Vocal Distortion Techniques in Heavy Metal',
-         a='Sadman Rahman, Kazi Newaj Faisal', v='IEEE SPICSCON', y=2026, note='(accepted)',
+         a='Md. Mehedi Hasan Bhuiyan, Fahmid Amin Zawad, Sadman Rahman, Kazi Newaj Faisal', v='IEEE SPICSCON', y=2026, note='(accepted)',
          d='A deployment-oriented framework for analysing extreme vocal distortion techniques used in heavy metal singing.'),
     dict(k='eeg', t='Exploring Gamma-Band Filtered Features and Machine Learning for Resource-Efficient Multi-Level Cognitive Load Classification Using EEG',
          a='Nur Md. Atiquzzaman Rasel, Sadman Rahman*, Kazi Newaj Faisal', v='IEEE QPAIN', y=2026, award='Best Presenter Award',
@@ -167,6 +167,8 @@ IMG = {  # title prefix -> figure thumbnail in images/papers/ (main + _b hover),
     'Neural Network Enhanced PID': 'pid',
     'GCAF-Net': 'gcaf',
     'High-Speed, Low-Power 8-Bit': 'alu_c',
+    'VoxScope': 'vox',
+    'FormSense': 'form',
 }
 
 
