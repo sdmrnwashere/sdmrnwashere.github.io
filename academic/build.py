@@ -172,6 +172,13 @@ IMG = {  # title prefix -> figure thumbnail in images/papers/ (main + _b hover),
 }
 
 
+def slugify(t, limit=72):  # same rule as tools/papers.py
+    import re as _re, unicodedata as _ud
+    s = ''.join(c for c in _ud.normalize('NFKD', t) if not _ud.combining(c)).lower()
+    s = _re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+    return s[:limit].rsplit('-', 1)[0] if len(s) > limit else s
+
+
 def thumb(p):
     for prefix, key in IMG.items():
         if p['t'].startswith(prefix):
@@ -186,14 +193,15 @@ def authors(a):
 
 def article(p):
     url = p.get('url')
-    title = f'<a href="{url}" class="papertitle">{E(p["t"])}</a>' if url else f'<span class="papertitle">{E(p["t"])}</span>'
+    page = f'../research/{slugify(p["t"])}/'
+    title = f'<a href="{page}" class="papertitle">{E(p["t"])}</a>'
     tag = SHORT.get(p['v'], p['v'].replace('IEEE ', ''))
     venue = f'<em>{E(p["v"])}</em> (<b>{E(tag)}</b>), {p["y"]}'
     if p.get('note'):
         venue += f' {p["note"]}'
     if p.get('award'):
         venue += f' &nbsp;<strong class="award">{p["award"]}</strong>'
-    pills = f'<a class="pill" href="{url}">{p.get("lname", "Paper")}</a>' if url else '<span class="pill muted">Link soon</span>'
+    pills = f'<a class="pill" href="{page}">Abstract</a>' + (f'<a class="pill" href="{url}">{p.get("lname", "Paper")}</a>' if url else '')
     t1, t2 = thumb(p)
     return f'''      <article class="paper{' highlighted' if p.get('hl') else ''}">
         <div class="paper-media">

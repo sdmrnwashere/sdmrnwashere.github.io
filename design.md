@@ -103,3 +103,17 @@ Push to a GitHub repo named `sdmrnwashere.github.io` → Settings → Pages → 
 - Run it after any content edit and after `academic/build.py`:  `python -I tools/seo.py`
   (idempotent: it replaces its own block).
 - Tab titles stay "Sadman Rahman" on every page, as requested.
+
+### Advanced SEO (2026-11-28)
+
+- `tools/papers.py` builds one page per paper at `research/<slug>/` (abstract from the PDF
+  in `tools/abstracts.json`, figure, BibTeX, related papers) with Google Scholar `citation_*`
+  tags, ScholarlyArticle + BreadcrumbList JSON-LD. Titles on the Research and academic pages
+  link there; the slug rule is shared by `tools/papers.py`, `tools/seo.py`, `academic/build.py`
+  and `assets/site.js` (accents stripped, any other symbol -> "-", max 72 chars).
+- Regenerate after content edits:  `python -I academic/build.py && python -I tools/papers.py && python -I tools/seo.py`
+- Person JSON-LD image is `assets/sadman-rahman.jpg`; INSIA Lab is an Organization with
+  `founder` = Sadman. Sitemap has 21 URLs with image entries. Footer has name-labelled
+  profile links. `404.html` keeps lost visitors on the site.
+- IndexNow key: `tools/indexnow_key.txt` (public file `<key>.txt` at the site root).
+  NOTE: don't create a top-level folder called `papers/` - on Windows it collides with `Papers/` (PDFs).

@@ -17,12 +17,12 @@ MIST = {'@type': 'CollegeOrUniversity', 'name': 'Military Institute of Science a
 PERSON = {
     '@type': 'Person', '@id': BASE + '#person',
     'name': 'Sadman Rahman', 'alternateName': ['SdmrnWasHere', 'sdmrnwashere', 'S. Rahman'],
-    'url': BASE, 'image': BASE + 'academic/images/sadman.jpg', 'email': 'mailto:sdmrnwashere@gmail.com',
+    'url': BASE, 'image': {'@type': 'ImageObject', 'url': BASE + 'assets/sadman-rahman.jpg', 'caption': 'Sadman Rahman'}, 'email': 'mailto:sdmrnwashere@gmail.com',
     'jobTitle': 'M.Sc. Student and Research Assistant',
     'description': 'Researcher in signal processing and AI for biomedical and wearable sensing.',
     'affiliation': [BUET, MIST],
     'alumniOf': [MIST, {'@type': 'EducationalOrganization', 'name': 'Milestone College'}],
-    'memberOf': [{'@type': 'Organization', 'name': 'INSIA Lab', 'url': 'https://www.insia-lab.com/home'},
+    'memberOf': [{'@id': BASE + '#insia'},
                  {'@type': 'Organization', 'name': 'IEEE'}],
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Dhaka', 'addressCountry': 'BD'},
     'nationality': {'@type': 'Country', 'name': 'Bangladesh'},
@@ -32,6 +32,9 @@ PERSON = {
     'award': ['Best Paper Award, IEEE SPICSCON 2025', 'Best Presenter Award, IEEE QPAIN 2026'],
     'sameAs': PROFILES,
 }
+
+INSIA = {'@type': 'Organization', '@id': BASE + '#insia', 'name': 'INSIA Lab', 'url': 'https://www.insia-lab.com/home',
+         'founder': {'@id': BASE + '#person'}, 'foundingDate': '2024-05', 'location': 'Dhaka, Bangladesh'}
 
 PAGES = {
     'index.html': ('', 'ProfilePage',
@@ -62,6 +65,13 @@ def papers():
     return ns['pubs']
 
 
+def slugify(t, limit=72):
+    import unicodedata
+    s = ''.join(c for c in unicodedata.normalize('NFKD', t) if not unicodedata.combining(c)).lower()
+    s = re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+    return s[:limit].rsplit('-', 1)[0] if len(s) > limit else s
+
+
 def JOURNAL(p):
     return not p['v'].startswith('IEEE ') or 'Journal' in p['v'] or 'Letters' in p['v']
 
@@ -73,23 +83,24 @@ def article(p):
          'isPartOf': ({'@type': 'Periodical', 'name': p['v']} if JOURNAL(p) else
                       {'@type': 'CreativeWork', 'name': 'Proceedings of ' + p['v']}),
          'abstract': p['d']}
+    a['url'] = BASE + 'research/' + slugify(p['t']) + '/'
     if p.get('url'):
-        a['url'] = p['url']
+        a['sameAs'] = p['url']
     return a
 
 
 def block(path, ptype, desc):
     url = BASE + path
-    graph = [dict(PERSON),
+    graph = [dict(PERSON), INSIA,
              {'@type': 'WebSite', '@id': BASE + '#website', 'url': BASE, 'name': 'Sadman Rahman', 'alternateName': 'SdmrnWasHere',
               'publisher': {'@id': PERSON['@id']}, 'inLanguage': 'en'},
              {'@type': ptype, '@id': url + '#page', 'url': url, 'name': 'Sadman Rahman', 'description': desc,
               'isPartOf': {'@id': BASE + '#website'}, 'about': {'@id': PERSON['@id']},
               'primaryImageOfPage': {'@type': 'ImageObject', 'url': CARD}}]
     if ptype == 'ProfilePage':
-        graph[2]['mainEntity'] = {'@id': PERSON['@id']}
+        graph[3]['mainEntity'] = {'@id': PERSON['@id']}
     if path in ('publications/', 'academic/'):
-        graph[2]['mainEntity'] = {'@type': 'ItemList', 'numberOfItems': len(PUBS),
+        graph[3]['mainEntity'] = {'@type': 'ItemList', 'numberOfItems': len(PUBS),
                                   'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': article(p)} for i, p in enumerate(PUBS)]}
     ld = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, separators=(',', ':'))
     me = '\n'.join(f'<link rel="me" href="{u}">' for u in PROFILES)
@@ -127,12 +138,19 @@ for file, (path, ptype, desc) in PAGES.items():
     open(file, 'w', encoding='utf-8').write(s)
     print('seo ->', file)
 
-urls = ['', 'publications/', 'cv/', 'repositories/', 'misc/', 'academic/']
+import json as _json, os as _os
+slugs = _json.load(open('tools/paper_slugs.json')) if _os.path.exists('tools/paper_slugs.json') else []
+IMGS = {'': ['assets/sadman-rahman.jpg', 'assets/sadman-rahman-portrait.jpg', 'assets/og-card.jpg'],
+        'academic/': ['academic/images/sadman.jpg']}
+urls = ['', 'publications/', 'cv/', 'repositories/', 'misc/', 'academic/'] + [f'research/{x}/' for x in slugs]
 pri = {'': '1.0', 'academic/': '0.9', 'publications/': '0.9', 'cv/': '0.8'}
-sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
 for u in urls:
-    sm.append(f'  <url><loc>{BASE}{u}</loc><lastmod>2026-11-28</lastmod><changefreq>monthly</changefreq><priority>{pri.get(u, "0.6")}</priority></url>')
+    imgs = ''.join(f'<image:image><image:loc>{BASE}{i}</image:loc></image:image>' for i in IMGS.get(u, []))
+    sm.append(f'  <url><loc>{BASE}{u}</loc><lastmod>2026-11-28</lastmod><changefreq>monthly</changefreq>'
+              f'<priority>{pri.get(u, "0.7" if u.startswith("research/") else "0.6")}</priority>{imgs}</url>')
 sm.append('</urlset>')
 open('sitemap.xml', 'w', encoding='utf-8').write('\n'.join(sm) + '\n')
 open('robots.txt', 'w', encoding='utf-8').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n')
-print('sitemap.xml + robots.txt written,', len(PUBS), 'papers in structured data')
+print('sitemap.xml (', len(urls), 'urls ) + robots.txt written,', len(PUBS), 'papers in structured data')

@@ -134,9 +134,10 @@
   const prog = document.createElement('div');
   prog.className = 'progress'; prog.innerHTML = '<i></i>';
   document.body.append(prog);
-  const marks = $$('.hero, .page-head, section.sec, section.r-block, .cv-block').filter(el => !el.closest('footer'));
+  const marks = $$('.hero, .page-head, .pp-head, section.sec, section.r-block, .cv-block, .pp-sec').filter(el => !el.closest('footer'));
   const label = el => {
     if (el.classList.contains('hero')) return 'Sadman Rahman · signals × AI';
+    if (el.classList.contains('pp-head')) return 'Paper · ' + ((el.querySelector('h1') || {}).textContent || '').split(':')[0];
     const h = el.querySelector('h1, h2');
     return h ? h.textContent.replace(/[.§]/g, '').trim() : '';
   };
@@ -168,6 +169,7 @@
     </div>
     <svg class="pulse" viewBox="0 0 1200 50" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
       <path d="M0 30 H420 L432 30 L440 22 L448 30 H470 L478 34 L490 4 L502 46 L512 30 H540 Q556 18 572 30 H1200"/></svg>
+    <p class="links-line">Find Sadman Rahman on <a href="${LINKS.linkedin}" rel="me noopener" target="_blank">LinkedIn</a> · <a href="${LINKS.scholar}" rel="me noopener" target="_blank">Google Scholar</a> · <a href="${LINKS.researchgate}" rel="me noopener" target="_blank">ResearchGate</a> · <a href="${LINKS.github}" rel="me noopener" target="_blank">GitHub</a> · <a href="https://www.insia-lab.com/home" target="_blank" rel="noopener">INSIA Lab</a> · <a href="${LINKS.behance}" rel="me noopener" target="_blank">Behance</a> · <a href="${root}academic/">Academic page</a></p>
     <div class="row"><span class="mono">© ${new Date().getFullYear()} Sadman Rahman · Dhaka, BD</span><span class="mono">Keys: 1–5 pages · T theme · / search papers</span></div>
   </div>`;
   document.body.append(footer);
@@ -366,9 +368,12 @@
     ['Exploring Gamma-Band', 'gamma'], ['Improved FMCW Radar', 'sethar'], ['Leveraging Power-Spectrum', 'cough'],
     ['Neural Network Enhanced PID', 'pid'], ['GCAF-Net', 'gcaf'], ['High-Speed, Low-Power 8-Bit', 'alu_c'], ['VoxScope', 'vox'], ['FormSense', 'form']];
   const figFor = p => (FIG.find(([pre]) => p.title.startsWith(pre)) || [])[1];
+  // Same rule as tools/papers.py slugify(): research/<slug>/ is the paper's own page
+  const slug = t => { let s = t.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    if (s.length > 72) s = s.slice(0, 72).replace(/-[^-]*$/, ''); return s; };
   const pubHTML = p => {
     const authors = esc(p.authors).split(', ').map(a => a.startsWith('Sadman Rahman') ? `<b>${a}</b>` : a).join(', ');
-    const title = p.url ? `<a href="${p.url}" target="_blank" rel="noopener">${esc(p.title)}</a>` : esc(p.title);
+    const title = `<a href="${root}research/${slug(p.title)}/">${esc(p.title)}</a>`;
     return `<li class="pub">
       <div class="sig">${figFor(p) ? `<span class="pfig"><img src="${root}academic/images/papers/${figFor(p)}.jpg" alt="" loading="lazy"><img src="${root}academic/images/papers/${figFor(p)}_b.jpg" alt="" loading="lazy"></span>` : glyph(p.m)}<span>${p.m} · ${p.type === 'journal' ? 'Journal' : 'Conf.'}</span></div>
       <div><h3>${title}</h3><p class="authors">${authors}</p>
