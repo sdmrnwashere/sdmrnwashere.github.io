@@ -92,3 +92,14 @@ Push to a GitHub repo named `sdmrnwashere.github.io` → Settings → Pages → 
 - v4 (2026-10-28): removed the ticker; content now mixes signals and AI (hero lead, research cards, model lane in the scope);
   added Research Assistant at MIST (Sep 2026 →, fingerprint attendance system) to the CV, Now panel, lab log and Code page;
   Misc gains Behance (professional graphic designer) and teacher cards; Behance added to the icon rows; keyboard hint auto-hides.
+
+## SEO (2026-11-28)
+
+- `tools/seo.py` writes, on every page: canonical URL, a page-specific description naming Sadman,
+  Open Graph + Twitter tags pointing at `assets/og-card.jpg` (1200×630), `rel="me"` links to
+  Scholar / GitHub / LinkedIn / ResearchGate / Behance / Google Site, and JSON-LD
+  (Person with `sameAs`, WebSite, and the page type). Research and academic pages also list
+  all papers as `ScholarlyArticle`s. It also writes `sitemap.xml` and `robots.txt`.
+- Run it after any content edit and after `academic/build.py`:  `python -I tools/seo.py`
+  (idempotent: it replaces its own block).
+- Tab titles stay "Sadman Rahman" on every page, as requested.

@@ -250,11 +250,6 @@ PAGE = '''<!DOCTYPE html>
     <meta name="description" content="Sadman Rahman: M.Sc. student in EEE at BUET working on signal processing, deep learning and applied AI for biomedical and wearable sensing.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <meta property="og:title" content="Sadman Rahman">
-    <meta property="og:description" content="Signal processing, deep learning and applied AI for biomedical and wearable sensing.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sdmrnwashere.github.io/academic/">
-    <meta property="og:image" content="https://sdmrnwashere.github.io/academic/images/sadman.jpg">
     <link rel="icon" href="../assets/favicon.svg?v=2">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
